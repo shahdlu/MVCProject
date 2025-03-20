@@ -1,3 +1,7 @@
+using Demo.DataAccess.Contexts;
+using Demo.DataAccess.Repositories;
+using Microsoft.EntityFrameworkCore;
+
 namespace Demo.Presentation
 {
     public class Program
@@ -8,7 +12,15 @@ namespace Demo.Presentation
 
             #region Add services to the container
 
-            builder.Services.AddControllersWithViews(); 
+            builder.Services.AddControllersWithViews();
+            //builderServices.AddScoped<ApplicationDbContext>();//2. Register to service in DI Container
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                //options.UseSqlServer(builder.Configuration["ConnectionStrings:DefultConnection"]);
+                //options.UseSqlServer(builder.Configuration.GetSection("ConnectionStrings")["DefultConnection"]);
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefultConnection"));
+            });
+            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 
             #endregion
 
