@@ -14,7 +14,7 @@ namespace Demo.BussinessLogic.Factories
         {
             return new DepartmentDto()
             {
-                DeptId = d.Id,
+                Id = d.Id,
                 Code = d.Code,
                 Description = d.Description,
                 Name = d.Name,
