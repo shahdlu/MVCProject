@@ -1,5 +1,6 @@
 ﻿using Demo.BussinessLogic.DataTransferObjects;
 using Demo.BussinessLogic.Services;
+using Demo.Presentation.ViewModels.DepartmentViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Demo.Presentation.Controllers
@@ -70,5 +71,66 @@ namespace Demo.Presentation.Controllers
 
         #endregion
 
+        #region Edit Department
+
+        [HttpGet]
+        public IActionResult Edit(int? id)
+        {
+            if (!id.HasValue) return BadRequest();
+            var department = _departmentServices.GetDepartmentById(id.Value);
+            if (department == null) return NotFound();
+            var ViewModel = new DepartmentEditViewModel()
+            {
+                Code = department.Code,
+                Name = department.Name,
+                Description = department.Description,
+                DateOfcreation =department.CreatedOn
+            };
+            return View(ViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Edit([FromRoute]int id, DepartmentEditViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var updatadedDepartment = new UpdatedDepartmentDto()
+                    {
+                        Id = id,
+                        Code = viewModel.Code,
+                        Name = viewModel.Name,
+                        Description = viewModel.Description,
+                        DateOfCreation = viewModel.DateOfcreation
+                    };
+                    int result = _departmentServices.updateDepartment(updatadedDepartment);
+                    if (result > 0)
+                        return RedirectToAction(nameof(Index));
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Department is not Updated");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //log Exception
+                    if (_environment.IsDevelopment())
+                    {
+                        //1.Development => log error to console and return same view with Error message
+                        ModelState.AddModelError(string.Empty, ex.Message);
+                    }
+                    else
+                    {
+                        //2.Deployment => log error in file | table in database and return error view
+                        _logger.LogError(ex.Message);
+                        return View("ErrorView", ex);
+                    }
+                }
+            }
+            return View(viewModel);
+        } 
+
+        #endregion
     }
 }
