@@ -1,4 +1,5 @@
 ﻿using Demo.DataAccess.Data.DbContexts;
+using Demo.DataAccess.Models.DepartmentModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;

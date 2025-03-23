@@ -1,4 +1,6 @@
-﻿namespace Demo.DataAccess.Repositories
+﻿using Demo.DataAccess.Models.DepartmentModel;
+
+namespace Demo.DataAccess.Repositories
 {
     public interface IDepartmentRepository
     {

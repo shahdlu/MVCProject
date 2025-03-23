@@ -1,5 +1,5 @@
 ﻿using Demo.BussinessLogic.DataTransferObjects;
-using Demo.DataAccess.Models;
+using Demo.DataAccess.Models.DepartmentModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
