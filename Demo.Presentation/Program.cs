@@ -1,5 +1,8 @@
-using Demo.DataAccess.Contexts;
-using Demo.DataAccess.Repositories;
+using Demo.BussinessLogic.Services.Classes;
+using Demo.BussinessLogic.Services.Interfaces;
+using Demo.DataAccess.Data.DbContexts;
+using Demo.DataAccess.Repositories.Classes;
+using Demo.DataAccess.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Demo.Presentation
@@ -21,6 +24,8 @@ namespace Demo.Presentation
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefultConnection"));
             });
             builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+            builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
             #endregion
 

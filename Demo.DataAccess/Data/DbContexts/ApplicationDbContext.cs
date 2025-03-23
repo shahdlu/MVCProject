@@ -1,10 +1,12 @@
-﻿using System.Reflection;
+﻿using Demo.DataAccess.Models.DepartmentModel;
+using System.Reflection;
 
-namespace Demo.DataAccess.Contexts
+namespace Demo.DataAccess.Data.DbContexts
 {
     public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
     {
         public DbSet<Department> Departments { get; set; }
+        public DbSet<Employee> Employees { get; set; }
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
         //    optionsBuilder.UseSqlServer("ConnectionString");
