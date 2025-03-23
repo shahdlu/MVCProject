@@ -1,5 +1,6 @@
-﻿using Demo.BussinessLogic.DataTransferObjects;
+﻿using Demo.BussinessLogic.DataTransferObjects.DepartmentDtos;
 using Demo.BussinessLogic.Factories;
+using Demo.BussinessLogic.Services.Interfaces;
 using Demo.DataAccess.Models;
 using Demo.DataAccess.Repositories.Interfaces;
 using System;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Demo.BussinessLogic.Services
+namespace Demo.BussinessLogic.Services.Classes
 {
     public class DepartmentService(IDepartmentRepository _departmentRepository) : IDepartmentService
     {

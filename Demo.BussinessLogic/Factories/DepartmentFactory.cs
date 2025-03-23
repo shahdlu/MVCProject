@@ -1,4 +1,4 @@
-﻿using Demo.BussinessLogic.DataTransferObjects;
+﻿using Demo.BussinessLogic.DataTransferObjects.DepartmentDtos;
 using Demo.DataAccess.Models.DepartmentModel;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,5 @@
-using Demo.BussinessLogic.Services;
+using Demo.BussinessLogic.Services.Classes;
+using Demo.BussinessLogic.Services.Interfaces;
 using Demo.DataAccess.Data.DbContexts;
 using Demo.DataAccess.Repositories.Classes;
 using Demo.DataAccess.Repositories.Interfaces;
@@ -24,6 +25,7 @@ namespace Demo.Presentation
             });
             builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+            builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
             #endregion
 
