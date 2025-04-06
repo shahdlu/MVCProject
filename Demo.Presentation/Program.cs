@@ -35,6 +35,7 @@ namespace Demo.Presentation
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
             //builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             builder.Services.AddAutoMapper(m => m.AddProfile(new MappingProfiles()));
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             #endregion
 
