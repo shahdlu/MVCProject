@@ -20,8 +20,8 @@ namespace Demo.BussinessLogic.Factories
                 IsActive = e.IsActive,
                 Salary = e.Salary,
                 Email = e.Email,
-                Gender = e.Gender,
-                EmployeeType = e.EmployeeType
+                Gender = e.Gender.ToString(),
+                EmployeeType = e.EmployeeType.ToString()
             };
         }
         public static EmployeeDetailsDto ToEmployeeDetailsDto(this Employee e)
@@ -36,9 +36,13 @@ namespace Demo.BussinessLogic.Factories
                 Salary = e.Salary,
                 Email = e.Email,
                 PhoneNumber = e.PhoneNumber,
-                HiringDate = e.HiringDate,
-                Gender = e.Gender,
-                EmployeeType = e.EmployeeType
+                HiringDate = DateOnly.FromDateTime(e.HiringDate),
+                Gender = e.Gender.ToString(),
+                EmployeeType = e.EmployeeType.ToString(),
+                CreatedBy = 1,
+                CreatedOn = e.CreatedOn,
+                LastModifiedBy = 1,
+                LastModifiedOn = e.LastModifiedOn,
             };
         }
         public static Employee ToEntity(this CreatedEmployeeDto employeeDto)

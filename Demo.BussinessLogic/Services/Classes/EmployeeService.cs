@@ -13,9 +13,9 @@ namespace Demo.BussinessLogic.Services.Classes
 {
     public class EmployeeService(IEmployeeRepository _employeeRepository) : IEmployeeService
     {
-        public IEnumerable<EmployeeDto> GetAllEmployees()
+        public IEnumerable<EmployeeDto> GetAllEmployees(bool withTracking = false)
         {
-            var employees = _employeeRepository.GetAll();
+            var employees = _employeeRepository.GetAll(withTracking);
             return employees.Select(e => e.ToEmployeeDto());
         }
 
