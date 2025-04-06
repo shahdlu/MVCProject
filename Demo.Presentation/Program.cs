@@ -27,6 +27,7 @@ namespace Demo.Presentation
                 //options.UseSqlServer(builder.Configuration["ConnectionStrings:DefultConnection"]);
                 //options.UseSqlServer(builder.Configuration.GetSection("ConnectionStrings")["DefultConnection"]);
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefultConnection"));
+                options.UseLazyLoadingProxies();
             });
             builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
