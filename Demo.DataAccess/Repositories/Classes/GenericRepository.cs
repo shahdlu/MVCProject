@@ -5,6 +5,7 @@ using Demo.DataAccess.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,6 +42,12 @@ namespace Demo.DataAccess.Repositories.Classes
         {
             _dbContext.Set<TEntity>().Add(entity);
             return _dbContext.SaveChanges();
+        }
+
+        public IEnumerable<TResult> GetAll<TResult>(Expression<Func<TEntity, TResult>> selector)
+        {
+            return _dbContext.Set<TEntity>().Where(e =>e.IsDeleted != true)
+                                            .Select(selector).ToList();
         }
     }
 }

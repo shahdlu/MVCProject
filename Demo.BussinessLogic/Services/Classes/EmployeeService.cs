@@ -17,10 +17,15 @@ namespace Demo.BussinessLogic.Services.Classes
     {
         public IEnumerable<EmployeeDto> GetAllEmployees(bool withTracking = false)
         {
-            var employees = _employeeRepository.GetAll(withTracking);
+            var employeeDto = _employeeRepository.GetAll(e => new EmployeeDto()
+            {
+                Id = e.Id,
+                Name = e.Name,
+                Salary = e.Salary
+            });
             //Scr = Employee
             //Dest = EployeeDto
-            var employeeDto = _mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeDto>>(employees);
+            //var employeeDto = _mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeDto>>(employees);
             return employeeDto;
             //return employees.Select(e => e.ToEmployeeDto());
         }
