@@ -56,11 +56,11 @@ namespace Demo.BussinessLogic.Factories
                 Salary = employeeDto.Salary,
                 Email = employeeDto.Email,
                 PhoneNumber = employeeDto.PhoneNumber,
-                HiringDate = employeeDto.HiringDate,
+                HiringDate = employeeDto.HiringDate.ToDateTime(new TimeOnly(0, 0)),
                 Gender = employeeDto.Gender,
                 EmployeeType = employeeDto.EmployeeType,
-                CreatedBy = employeeDto.CreatedBy,
-                LastModifedBy = employeeDto.LastModifedBy
+                CreatedBy = 1,
+                LastModifedBy = 1
             };
         }
         public static Employee ToEntity(this UpdatedEmployeeDto employeeDto)
@@ -74,11 +74,11 @@ namespace Demo.BussinessLogic.Factories
                 Salary = employeeDto.Salary,
                 Email = employeeDto.Email,
                 PhoneNumber = employeeDto.PhoneNumber,
-                HiringDate = employeeDto.HiringDate,
+                HiringDate = employeeDto.HiringDate.ToDateTime(new TimeOnly(0, 0)),
                 Gender = employeeDto.Gender,
                 EmployeeType = employeeDto.EmployeeType,
-                CreatedBy = employeeDto.CreatedBy,
-                LastModifedBy = employeeDto.LastModifedBy
+                CreatedBy = 1,
+                LastModifedBy = 1
             };
         }
     }
