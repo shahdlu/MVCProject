@@ -12,6 +12,14 @@ namespace Demo.Presentation.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            ViewData["Message"] = new DepartmentDto()
+            {
+                Name = "TestViewData"
+            };
+            ViewBag.Message = new DepartmentDto()
+            {
+                Name = "TestViewBage"
+            };
             var departments = _departmentServices.GetAllDepartments();
             return View(departments);
         }
@@ -26,19 +34,31 @@ namespace Demo.Presentation.Controllers
 
         [HttpPost]
         //[ValidateAntiForgeryToken]// Action Filter
-        public IActionResult Create(CreatedDepartmentDto departmentDto)
+        public IActionResult Create(DepartmenViewModel departmentViewModel)
         {
             if (ModelState.IsValid)//server side validation
             {
                 try
                 {
-                    int result = _departmentServices.AddDepartment(departmentDto);
-                    if (result > 0)
-                        return RedirectToAction(nameof(Index));
-                    else
+                    var departmentDto = new CreatedDepartmentDto()
                     {
-                        ModelState.AddModelError(string.Empty, "Department can't be created");
-                    }
+                        Name = departmentViewModel.Name,
+                        Code = departmentViewModel.Code,
+                        DateOfCreation = departmentViewModel.DateOfcreation,
+                        Description = departmentViewModel.Description
+                    };
+                    int result = _departmentServices.AddDepartment(departmentDto);
+                    string Message;
+                    if (result > 0)
+                        Message = $"Department {departmentViewModel.Name} is created successfully";
+                    else
+                        Message = $"Department {departmentViewModel.Name} cannot be created";
+                    TempData["Message"] = Message ;
+                    return RedirectToAction(nameof(Index));
+                    //else
+                    //{
+                    //    ModelState.AddModelError(string.Empty, "Department can't be created");
+                    //}
                 }
                 catch (Exception ex)
                 {
@@ -55,7 +75,7 @@ namespace Demo.Presentation.Controllers
                     }
                 }
             }
-            return View(departmentDto);
+            return View(departmentViewModel);
         }
 
         #endregion
@@ -81,7 +101,7 @@ namespace Demo.Presentation.Controllers
             if (!id.HasValue) return BadRequest();
             var department = _departmentServices.GetDepartmentById(id.Value);
             if (department == null) return NotFound();
-            var ViewModel = new DepartmentEditViewModel()
+            var ViewModel = new DepartmenViewModel()
             {
                 Code = department.Code,
                 Name = department.Name,
@@ -92,7 +112,7 @@ namespace Demo.Presentation.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit([FromRoute]int id, DepartmentEditViewModel viewModel)
+        public IActionResult Edit([FromRoute]int id, DepartmenViewModel viewModel)
         {
             if (ModelState.IsValid)
             {

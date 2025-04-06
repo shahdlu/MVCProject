@@ -15,12 +15,14 @@ namespace Demo.BussinessLogic.Profiles
         {
             CreateMap<Employee, EmployeeDto>()
                 .ForMember(dest => dest.EmpGender, options => options.MapFrom(scr => scr.Gender))
-                .ForMember(dest => dest.EmpType, options => options.MapFrom(scr => scr.EmployeeType));
+                .ForMember(dest => dest.EmpType, options => options.MapFrom(scr => scr.EmployeeType))
+                .ForMember(dest => dest.Department, options => options.MapFrom(scr => scr.Department != null ? scr.Department.Name : null));
 
             CreateMap<Employee, EmployeeDetailsDto>()
                 .ForMember(dest => dest.Gender, options => options.MapFrom(scr => scr.Gender))
                 .ForMember(dest => dest.EmployeeType, options => options.MapFrom(scr => scr.EmployeeType))
-                .ForMember(dest => dest.HiringDate, options => options.MapFrom(scr => DateOnly.FromDateTime(scr.HiringDate)));
+                .ForMember(dest => dest.HiringDate, options => options.MapFrom(scr => DateOnly.FromDateTime(scr.HiringDate)))
+                .ForMember(dest => dest.Department, options => options.MapFrom(scr => scr.Department != null ? scr.Department.Name : null));
 
             CreateMap<CreatedEmployeeDto, Employee>()
                 .ForMember(dest => dest.HiringDate, options => options.MapFrom(scr => scr.HiringDate.ToDateTime(TimeOnly.MinValue)));

@@ -15,7 +15,7 @@ namespace Demo.BussinessLogic.DataTransferObjects.DepartmentDtos
         [Required]
         [Range(100, int.MaxValue)]
         public string Code { get; set; } = null!;
-        public DateOnly DateOfCreation { get; set; }
+        public DateOnly DateOfCreation  { get; set; }
         public string Description { get; set; } = string.Empty;
     }
 }

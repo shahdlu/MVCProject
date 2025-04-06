@@ -26,28 +26,30 @@ namespace Demo.DataAccess.Repositories.Classes
             return _dbContext.Set<TEntity>().Find(id);
         }
         //Update
-        public int Update(TEntity entity)
+        public void Update(TEntity entity)
         {
             _dbContext.Set<TEntity>().Update(entity);//update locally
-            return _dbContext.SaveChanges();
         }
         //Delete
-        public int Remove(TEntity entity)
+        public void Remove(TEntity entity)
         {
             _dbContext.Set<TEntity>().Remove(entity);
-            return _dbContext.SaveChanges();
         }
         //Insert
-        public int Add(TEntity entity)
+        public void Add(TEntity entity)
         {
             _dbContext.Set<TEntity>().Add(entity);
-            return _dbContext.SaveChanges();
         }
 
         public IEnumerable<TResult> GetAll<TResult>(Expression<Func<TEntity, TResult>> selector)
         {
             return _dbContext.Set<TEntity>().Where(e =>e.IsDeleted != true)
                                             .Select(selector).ToList();
+        }
+
+        public IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate)
+        {
+            return _dbContext.Set<TEntity>().Where(predicate).ToList();
         }
     }
 }
