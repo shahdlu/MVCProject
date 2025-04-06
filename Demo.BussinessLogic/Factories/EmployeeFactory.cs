@@ -20,8 +20,8 @@ namespace Demo.BussinessLogic.Factories
                 IsActive = e.IsActive,
                 Salary = e.Salary,
                 Email = e.Email,
-                Gender = e.Gender.ToString(),
-                EmployeeType = e.EmployeeType.ToString()
+                EmpGender = e.Gender.ToString(),
+                EmpType = e.EmployeeType.ToString()
             };
         }
         public static EmployeeDetailsDto ToEmployeeDetailsDto(this Employee e)
