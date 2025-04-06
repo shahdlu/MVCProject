@@ -48,12 +48,17 @@ namespace Demo.Presentation.Controllers
                         Description = departmentViewModel.Description
                     };
                     int result = _departmentServices.AddDepartment(departmentDto);
+                    string Message;
                     if (result > 0)
-                        return RedirectToAction(nameof(Index));
+                        Message = $"Department {departmentViewModel.Name} is created successfully";
                     else
-                    {
-                        ModelState.AddModelError(string.Empty, "Department can't be created");
-                    }
+                        Message = $"Department {departmentViewModel.Name} cannot be created";
+                    TempData["Message"] = Message ;
+                    return RedirectToAction(nameof(Index));
+                    //else
+                    //{
+                    //    ModelState.AddModelError(string.Empty, "Department can't be created");
+                    //}
                 }
                 catch (Exception ex)
                 {
